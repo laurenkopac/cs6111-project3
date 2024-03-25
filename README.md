@@ -11,9 +11,7 @@ Amari Byrd (ab5311) and Lauren Kopac (ljk2148)
 ## API Keys
 |Key Name | Key|
 |---------|------------|
-|Google API Key | `AIzaSyBHRHOxxGtFuRU3bfpVkGKc29_R8jN6Gu8`|
-|Google Engine ID |`f2d45d63dda814dd6`|
-|Google Gemini API| `AIzaSyC-esIaQHAInpTOquQmTPN8-7w_FnIrTvU`|
+
 
 
 ## How to Use
