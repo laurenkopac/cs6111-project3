@@ -1,0 +1,12 @@
+====== Frequent itemsets (min_sup = 10.0%) ======
+       [A] -- 70.44%
+       [Manhattan] -- 37.72%
+       [MAINTENANCE, CONSTRUCTION & PLACEMENT] -- 29.90%
+       [Brooklyn] -- 25.56%
+       [Queens] -- 23.88%
+       [CONTAMINATION] -- 21.80%
+       [American] -- 18.42%
+       [FOOD HANDLING] -- 16.24%
+       [PEST CONTROL] -- 12.18%
+
+====== High-confidence association rules (min_conf = 70.0%) ======
