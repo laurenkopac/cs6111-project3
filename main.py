@@ -97,6 +97,7 @@ def join_sets(itemsets, k, min_sup, df):
     """
     TODO: remove hash tree functionality
     incorporate singleton sets into freq item sets if applicable
+    what's going on with the grades column?
     """
 
     for itemset1 in itemsets:
