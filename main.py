@@ -83,12 +83,21 @@ def join_sets(itemsets, k, min_sup, df):
     new_candidate_itemsets = set()
     hash_tree = {}  # Hash tree to efficiently store and retrieve itemsets
 
-    # Construct the hash tree
+    min_sup_count = min_sup * df.shape[0]  # Calculate minimum support count threshold
+
+   # Construct the hash tree
     for itemset in itemsets:
         if len(itemset) == k - 1:
             for subset in combinations(itemset, k - 1):
                 subset_set = frozenset(subset)
                 hash_tree[subset_set] = True
+
+    rows = df['items'].apply(frozenset)
+
+    """
+    TODO: remove hash tree functionality
+    incorporate singleton sets into freq item sets if applicable
+    """
 
     for itemset1 in itemsets:
         for itemset2 in itemsets:
@@ -103,15 +112,13 @@ def join_sets(itemsets, k, min_sup, df):
                 # Check if all (k-1)-size subsets are in the hash tree
                 is_valid = all(subset in hash_tree for subset in subsets)
                 if is_valid:
-                    support = sum(1 for _, transaction in df.iterrows() if union_set.issubset(transaction['items']))
-                    if support >= min_sup:
+                    support = rows.apply(lambda rows: union_set.issubset(rows)).sum()
+                    if support >= min_sup_count:
                         new_candidate_itemsets.add(frozenset(union_set))
                         # Add the new itemset to the hash tree
                         hash_tree[frozenset(union_set)] = True
 
-
     return new_candidate_itemsets
-
 
 def generate_freq_itemsets(df, min_sup):
     """
@@ -119,7 +126,6 @@ def generate_freq_itemsets(df, min_sup):
     """
     # Extract individual items from the 'items' column, splitting them into words seperated by commas
     items = [set(item.split(',')) for sublist in df['items'] for item in sublist if len(item) > 1]
-    print(items)
     unique_items = set(frozenset(item) for item in items)
 
     # Initialize candidate itemsets with singleton sets
@@ -136,36 +142,50 @@ def generate_freq_itemsets(df, min_sup):
         
         # Filter out infrequent itemsets
         for itemset in new_candidate_itemsets:
-            support = sum(1 for _, transaction in df.iterrows() if itemset.issubset(transaction['items']))
+            support = sum(1 for _, rows in df.iterrows() if itemset.issubset(rows['items']))
             if support >= min_sup:
-                freq_itemsets[itemset] = support
+                freq_itemsets[itemset] = support / df.shape[0]
 
         candidate_itemsets = {itemset: support for itemset, support in freq_itemsets.items()}
         k += 1
 
     return freq_itemsets
 
-def generate_assoc_rules(freq_itemsets, min_conf):
+"""
+TODO - assoc rules not currently returning any values
+double check/fix conf calc
+should it be support counts or supp % ?
+"""
+
+def generate_assoc_rules(freq_itemsets, min_conf, df_length):
     """
     Generate association rules from frequent item sets with a min_conf inputted by the user through cmnd
     """
     assoc_rules = []
-    for itemset in freq_itemsets.keys():
+    for itemset, support in freq_itemsets.items():
         if len(itemset) > 1:
             for i in range(1, len(itemset)):
                 for lhs in combinations(itemset, i):
-                    lhs = set(lhs)
+                    lhs = frozenset(lhs)  # Convert set to frozenset
                     # Find RHS by removing items that are found on the LHS
                     rhs = itemset - lhs
+                    # Calculate support for the combined itemset
+                    support_combined = support
+                    # Calculate support for the LHS (only if LHS is a freq itemset)
+                    try:
+                        support_lhs = freq_itemsets[lhs]
+                    except:
+                        continue
                     # Calculate confidence
-                    confidence = freq_itemsets[itemset] / freq_itemsets[lhs.union(rhs)]
+                    confidence = support_combined / support_lhs if support_lhs > 0 else 0
                     if confidence >= min_conf:
                         assoc_rules.append((lhs, rhs, confidence))
     return assoc_rules
 
+
 def run_apriori(df, min_sup, min_conf):
     print("Generating frequent itemsets...")
-    freq_itemsets = generate_freq_itemsets(df,min_sup)
+    freq_itemsets = generate_freq_itemsets(df, min_sup)
     print("Generating association rules...")
     assoc_rules = generate_assoc_rules(freq_itemsets, min_conf)
 
@@ -176,14 +196,14 @@ def write_output(filename, itemsets, assoc_rules, min_sup, min_conf):
         output.write(f'====== Frequent itemsets (min_sup = {min_sup*100}%) ======\n')
         for itemset, support in sorted(itemsets.items(), key=lambda x: x[1], reverse=True):
             items_str = ", ".join(itemset)
-            output.write(f'       [{items_str}] -- {support:.2f}%\n')
+            output.write(f'       [{items_str}] -- {support*100:.2f}%\n')
 
         output.write('\n')
         output.write(f'====== High-confidence association rules (min_conf = {min_conf*100}%) ======\n')
         for lhs, rhs, confidence in assoc_rules:
             lhs_str = ", ".join(lhs)
             rhs_str = ", ".join(rhs)
-            output.write(f'       [{lhs_str}] => [{rhs_str}] -- (Confidence: {confidence:.2f}%)\n')
+            output.write(f'       [{lhs_str}] => [{rhs_str}] -- (Confidence: {confidence*100:.2f}%)\n')
 
 def main(min_sup,min_conf,df):
     

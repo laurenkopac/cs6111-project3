@@ -162,7 +162,6 @@ df['CUISINE_DESC'] = df['CUISINE_DESC'].map(cuisine_mapping)
 
 # Drop NaN rows
 df.dropna(inplace=True)
-df.drop_duplicates(inplace=True)
 
 # Reject dataset if less than 1000 rows are left after cleaning
 if df.shape[0] < 1000:

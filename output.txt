@@ -1,3 +1,84 @@
 ====== Frequent itemsets (min_sup = 1.0%) ======
+       [Manhattan, American] -- 12.64%
+       [Manhattan, CONTAMINATION] -- 9.16%
+       [Manhattan, Asian] -- 7.16%
+       [Asian, Queens] -- 6.28%
+       [American, Brooklyn] -- 6.18%
+       [CONTAMINATION, American] -- 6.16%
+       [American, Queens] -- 5.70%
+       [Manhattan, FOOD HANDLING] -- 5.70%
+       [CONTAMINATION, Queens] -- 5.42%
+       [CONTAMINATION, Brooklyn] -- 5.16%
+       [Manhattan, PEST CONTROL] -- 4.96%
+       [Beverages, Manhattan] -- 4.78%
+       [Asian, CONTAMINATION] -- 4.64%
+       [Asian, Brooklyn] -- 4.52%
+       [FOOD HANDLING, Brooklyn] -- 4.34%
+       [FOOD HANDLING, American] -- 4.24%
+       [Latin American, Queens] -- 4.02%
+       [FOOD HANDLING, Queens] -- 4.02%
+       [Asian, FOOD HANDLING] -- 4.00%
+       [Manhattan, PLUMBING] -- 3.88%
+       [Latin American, Brooklyn] -- 3.80%
+       [Manhattan, Italian] -- 3.76%
+       [American, PEST CONTROL] -- 3.54%
+       [PEST CONTROL, Brooklyn] -- 3.38%
+       [Queens, PEST CONTROL] -- 3.24%
+       [PLUMBING, American] -- 3.14%
+       [Asian, PEST CONTROL] -- 3.02%
+       [PLUMBING, Brooklyn] -- 2.90%
+       [Manhattan, CONTAMINATION, American] -- 2.82%
+       [Beverages, Brooklyn] -- 2.78%
+       [PLUMBING, Queens] -- 2.74%
+       [Manhattan, Desserts] -- 2.68%
+       [Manhattan, WAREWASHING] -- 2.56%
+       [Bronx, American] -- 2.50%
+       [Manhattan, European] -- 2.34%
+       [CONTAMINATION, Latin American] -- 2.26%
+       [Beverages, CONTAMINATION] -- 2.24%
+       [Brooklyn, Desserts] -- 2.22%
+       [Italian, Brooklyn] -- 2.18%
+       [FOOD HANDLING, Latin American] -- 2.06%
+       [European, Brooklyn] -- 2.06%
+       [Asian, PLUMBING] -- 2.04%
+       [Manhattan, Asian, CONTAMINATION] -- 1.96%
+       [CONTAMINATION, Italian] -- 1.94%
+       [Bronx, CONTAMINATION] -- 1.92%
+       [FOOD HANDLING, Italian] -- 1.90%
+       [European, CONTAMINATION] -- 1.88%
+       [Queens, Desserts] -- 1.82%
+       [Beverages, Queens] -- 1.80%
+       [WAREWASHING, Brooklyn] -- 1.72%
+       [Italian, Queens] -- 1.72%
+       [Manhattan, FOOD HANDLING, American] -- 1.72%
+       [Manhattan, American, PEST CONTROL] -- 1.72%
+       [American, WAREWASHING] -- 1.68%
+       [CONTAMINATION, Desserts] -- 1.64%
+       [Manhattan, Latin American] -- 1.54%
+       [Bronx, FOOD HANDLING] -- 1.54%
+       [WAREWASHING, Queens] -- 1.52%
+       [Latin American, PEST CONTROL] -- 1.42%
+       [Asian, Bronx] -- 1.42%
+       [Manhattan, PLUMBING, American] -- 1.40%
+       [European, Queens] -- 1.36%
+       [Asian, CONTAMINATION, Queens] -- 1.36%
+       [Bronx, Latin American] -- 1.32%
+       [Asian, WAREWASHING] -- 1.30%
+       [Beverages, FOOD HANDLING] -- 1.30%
+       [American, Staten Island] -- 1.30%
+       [Asian, FOOD HANDLING, Queens] -- 1.30%
+       [Italian, PEST CONTROL] -- 1.28%
+       [Manhattan, Asian, FOOD HANDLING] -- 1.28%
+       [CONTAMINATION, American, Brooklyn] -- 1.26%
+       [PLUMBING, Latin American] -- 1.22%
+       [CONTAMINATION, American, Queens] -- 1.22%
+       [Beverages, CONTAMINATION, Manhattan] -- 1.20%
+       [Bronx, PEST CONTROL] -- 1.18%
+       [FOOD HANDLING, American, Brooklyn] -- 1.14%
+       [Beverages, PLUMBING] -- 1.08%
+       [Beverages, PEST CONTROL] -- 1.06%
+       [FOOD HANDLING, Desserts] -- 1.02%
+       [PLUMBING, Desserts] -- 1.02%
 
-====== High-confidence association rules (min_conf = 70.0%) ======
+====== High-confidence association rules (min_conf = 50.0%) ======
+       [Beverages, CONTAMINATION] => [Manhattan] -- (Confidence: 53.57%)
