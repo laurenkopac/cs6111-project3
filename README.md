@@ -8,9 +8,19 @@ Amari Byrd (ab5311) and Lauren Kopac (ljk2148)
 |File Name| Description|
 |---------|------------|
 |`main.py`||
-|`INTEGRATED-DATASET.csv`||
-|`example-run.txt`||
-|`requirements.txt`||
+|`INTEGRATED-DATASET.csv`| Our processed dataset, cleaned from the web-export as detailed in the Data Cleaning section below|
+|`example-run.txt`| Text file export from example run, tuned with the specifications detailed in the Example Run section below|
+|`requirements.txt`| Requirements file for our program|
+
+## Files NOT in Submission
+The below files were used in our program to produce our cleaned dataset (`INTEGRATED-DATASET.csv`), but are not required to run the program assuming you already have access to the data.
+
+|File Name| Description|
+|---------|------------|
+|`data_clean.py`|Scripted used to clean raw dataset from NYC Open Data|
+|`restaurant_inspection_results.csv`| Original dataset exported from NYC Open Data|
+|`Violation-Health-Code-Mapping.txt`| CSV file mapping violation codes to generalized descriptions|
+
 
 
 
@@ -74,7 +84,10 @@ Below is a complete list of the 27 fields associated with this dataset:
 
 For more information on these fields, please visit the link above.
 
-### Data Cleaning
+## Data Cleaning
+To clean our large dataset, we used the `data_clean.py` script, relying primarily on the `pandas` package to handle data transformations. For simplicity, and because the A Priori algorithm can be computationally expensive, we decided to use only 5 fields to find association rules (see field table with descriptions below). To further clean our dataset, we generized the `CUISINE DESCRIPTION` and `VIOLATION CODE` fields, which we found to be unnecessarily specific and granular for our purposes. To generalize cuisines, we provided the full list of cuisine options in our dataset to ChatGPT and prompted it to generalize into a smaller subset of broader categories. We then used a dictionary to map the possibilities. For violation codes, we were fortunate to find a mapping of violation codes (generally 3 character codes) to short descriptions (1 - 4 word summaries of the violations) on Github [1]. We used this mapping and generalized even further, grouping like categories together (i.e., converting HOT HANDLING and COLD HANDLING to simply FOOD HANDLING). Lastly, we filtered out any nondescript cuisines, violation descriptions, or incomplete/invalid grades that we believed to be unhelpful in forming association rules. Once the data was cleaned, we asserted that were left with at least 1000 rows. Again, because A Priori can be computationally expensive, we limited our cleaned dataset to 5000 randomly sampled rows (ensuring each row was sampled only once).
+
+### Fields Used
 While there are 27 fields in the original dataset, we narrowed the scope of our project to down to 5.
 
 |Field Name| Description|
@@ -83,17 +96,21 @@ While there are 27 fields in the original dataset, we narrowed the scope of our 
 |`BORO`| Borough in which entity is located; text (Manhattan, Brooklyn, Bronx, Queens, State Island)|
 |`CUISINE_DESC`| Describes the entity cuisine; Optional field provided by entity; see below for mapping methodology and possible cuisines; text|
 |`CATEGORY_DESC`| Describes the category of health code violation; see below for mapping methodology and possible categories; text| 
-
+|`GRADE`| A letter grade assigned to the entity by the DOHMH. Highest distinction is 'A' followed by 'B' and 'C' as the lowest possible passing grade.
 
 ## Internal Design
+Our program runs in 4 main phases: Data Cleaning, Generating Frequent Itemsets, Creating Association Rules, Exporting Results.
 
 ### Phase 1: Data Cleaning
+For a detailed methodolgy
+1. Import the DOHMH dataset using `pd.read_csv()`
+2. Import 
 
 ### Phase 2: Finding Frequent Itemsets
 
 ### Phase 3: Creating Association Rules
 
-### Phase 4: Export
+### Phase 4: Export Results
 
 ## Results of Example Run
 To produce the results of the provided example run in `example-run.txt`, we tuned our parameters to the following:
@@ -109,7 +126,8 @@ Our programs relies on the following Python frameworks:
 |Library | Use |
 |---------|------------|
 |`pandas` | Used primarily in data cleaning of the original dataset|
-|`
+|`sys` | For grabbing agruments passed through the cmd line by the user|
+|`itertools`| Used to construct all possible combinations of itemsets in the A Priori algorithm |
 
 ## External References
 [1] https://github.com/nychealth/Food-Safety-Health-Code-Reference/blob/main/README.md for health code violation mapping
