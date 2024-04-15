@@ -89,12 +89,27 @@ While there are 27 fields in the original dataset, we narrowed the scope of our 
 
 ### Phase 1: Data Cleaning
 
+### Phase 2: Finding Frequent Itemsets
+
+### Phase 3: Creating Association Rules
+
+### Phase 4: Export
+
+## Results of Example Run
+To produce the results of the provided example run in `example-run.txt`, we tuned our parameters to the following:
+
+ * `min_sup` = 
+ * `min_conf` = 
+
+With these thresholds on our `INTEGRATED-DATASET.csv`, we found the following association rules: 
+
 ## External Libraries
 Our programs relies on the following Python frameworks:
 
 |Library | Use |
 |---------|------------|
-|`pandas` | |
+|`pandas` | Used primarily in data cleaning of the original dataset|
+|`
 
 ## External References
 [1] https://github.com/nychealth/Food-Safety-Health-Code-Reference/blob/main/README.md for health code violation mapping
