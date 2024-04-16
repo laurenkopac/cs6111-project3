@@ -162,7 +162,6 @@ def generate_assoc_rules(freq_itemsets, min_conf):
     """
 
     # Generate association rules
-    freq_itemsets = {'frequent_1_itemsets': {'A': 0.7144, 'Manhattan': 0.3758, 'MAINTENANCE, CONSTRUCTION & PLACEMENT': 0.3064, 'American': 0.2832, 'Brooklyn': 0.2562, 'Queens': 0.2422, 'CONTAMINATION': 0.2236, 'Asian': 0.2, 'FOOD HANDLING': 0.1618, 'PEST CONTROL': 0.1302, 'B': 0.11, 'Latin American': 0.109, 'PLUMBING': 0.107, 'Beverages': 0.1002, 'Italian': 0.0924}, 'frequent_2_itemsets': {(('CONTAMINATION', 'Manhattan'), 0.0916), (('A', 'American'), 0.2222), (('A', 'FOOD HANDLING'), 0.0998), (('A', 'Manhattan'), 0.2722), (('A', 'CONTAMINATION'), 0.1542), (('A', 'Asian'), 0.1168), (('A', 'Brooklyn'), 0.186), (('American', 'Manhattan'), 0.1264), (('A', 'Queens'), 0.166)}, 'frequent_3_itemsets': {(('A', 'American', 'Manhattan'), 0.0986)}}
     assoc_rules = []
     for itemnum, itemsets in freq_itemsets.items():
         if itemnum == 'frequent_1_itemsets': # single itemset (1-itemset) cannot be used in association rules
