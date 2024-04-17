@@ -1,1 +1,40 @@
 ====== Frequent itemsets (min_sup = 9.0%) ======
+       ['A'] -- 81.74%
+       ['Manhattan'] -- 37.019999999999996%
+       ['A', 'Manhattan'] -- 31.119999999999997%
+       ['MAINTENANCE, CONSTRUCTION & PLACEMENT'] -- 30.459999999999997%
+       ['American'] -- 29.020000000000003%
+       ['Brooklyn'] -- 26.700000000000003%
+       ['A', 'American'] -- 25.28%
+       ['Queens'] -- 23.04%
+       ['A', 'Brooklyn'] -- 21.86%
+       ['CONTAMINATION'] -- 21.740000000000002%
+       ['Asian'] -- 18.8%
+       ['A', 'Queens'] -- 18.34%
+       ['A', 'CONTAMINATION'] -- 17.26%
+       ['FOOD HANDLING'] -- 15.78%
+       ['PEST CONTROL'] -- 13.26%
+       ['A', 'Asian'] -- 13.26%
+       ['American', 'Manhattan'] -- 12.559999999999999%
+       ['A', 'FOOD HANDLING'] -- 11.66%
+       ['A', 'American', 'Manhattan'] -- 10.96%
+       ['B'] -- 10.92%
+       ['Beverages'] -- 10.86%
+       ['Latin American'] -- 10.72%
+       ['PLUMBING'] -- 10.280000000000001%
+       ['A', 'Beverages'] -- 9.74%
+       ['Italian'] -- 9.42%
+       ['A', 'PEST CONTROL'] -- 9.34%
+       ['Bronx'] -- 9.32%
+
+====== High-confidence association rules (min_conf = 70.0%) ======
+       [Beverages] => [A] -- (Confidence: 89.69%)
+       [American, Manhattan] => [A] -- (Confidence: 87.26%)
+       [American] => [A] -- (Confidence: 87.11%)
+       [Manhattan] => [A] -- (Confidence: 84.06%)
+       [Brooklyn] => [A] -- (Confidence: 81.87%)
+       [Queens] => [A] -- (Confidence: 79.60%)
+       [CONTAMINATION] => [A] -- (Confidence: 79.39%)
+       [FOOD HANDLING] => [A] -- (Confidence: 73.89%)
+       [Asian] => [A] -- (Confidence: 70.53%)
+       [PEST CONTROL] => [A] -- (Confidence: 70.44%)

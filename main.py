@@ -84,7 +84,7 @@ def join_sets(itemsets, k, min_sup, df):
 
     min_sup_count = min_sup * df.shape[0]  # Calculate minimum support count threshold
 
-    print(f"current k = {k}")
+    print(f"Current iteration: k = {k}")
 
     for itemset1 in itemsets:
         for itemset2 in itemsets:
@@ -137,7 +137,6 @@ def generate_freq_itemsets(df, min_sup):
     while True:
         # Generate candidate item sets of size k
         new_candidate_itemsets = join_sets(candidate_itemsets, k, min_sup, df)
-        print(f"new_candidate_itemsets after join in generate_freq_itemsets = {new_candidate_itemsets}")
         if not new_candidate_itemsets:
             # Terminate the loop when no new candidates can be generated
             break
@@ -147,21 +146,12 @@ def generate_freq_itemsets(df, min_sup):
         candidate_itemsets = {itemset for itemset, _ in new_candidate_itemsets}
         k += 1
 
-    print("final freq_itemset set in generate_freq_itemsets=", freq_itemsets)
     return freq_itemsets
-
-"""
-TODO - assoc rules not currently returning any values
-double check/fix conf calc
-should it be support counts or supp % ?
-"""
 
 def generate_assoc_rules(freq_itemsets, min_conf):
     """
     Generate association rules from frequent item sets with a min_conf inputted by the user through cmnd
     """
-
-    # Generate association rules
     assoc_rules = []
     for itemnum, itemsets in freq_itemsets.items():
         if itemnum == 'frequent_1_itemsets': # single itemset (1-itemset) cannot be used in association rules
@@ -191,10 +181,8 @@ def generate_assoc_rules(freq_itemsets, min_conf):
                    
                     # Calculate confidence
                     confidence = support_combined / support_lhs if support_lhs > 0 else 0
-                    print("possible assoc rule = ", (lhs, rhs, confidence))
                     if confidence >= min_conf:
                         assoc_rules.append((lhs, rhs, confidence))
-    print("final assoc_rules = ", assoc_rules)
     return assoc_rules
 
 
@@ -206,17 +194,35 @@ def run_apriori(df, min_sup, min_conf):
 
     return freq_itemsets, assoc_rules
 
+def format_itemsets(itemsets):
+    all_itemsets = []
+    for _, value in itemsets.items():
+        if isinstance(value, dict):
+            for sub_key, sub_value in value.items():
+                all_itemsets.append((sub_key, sub_value))
+        elif isinstance(value, set):
+            for itemset, support in value:
+                all_itemsets.append((itemset, support))
+
+    all_itemsets_sorted = sorted(all_itemsets, key=lambda x: x[1], reverse=True)
+    
+    formatted_itemsets = ""
+    for itemset, support in all_itemsets_sorted:
+        formatted_itemsets += f"       {[itemset]} -- {support*100}%\n".replace('(','').replace(')','')
+        
+    return formatted_itemsets
+
 def write_output(filename, itemsets, assoc_rules, min_sup, min_conf):
     with open(filename, 'w') as output:
         output.write(f'====== Frequent itemsets (min_sup = {min_sup*100}%) ======\n')
-        print("itemsets in write_output = ",itemsets)
-        for itemset, support in sorted(itemsets.items(), key=lambda x: x[1], reverse=True):
-            items_str = ", ".join(itemset)
-            output.write(f'       [{items_str}] -- {support*100:.2f}%\n')
+        output.write(format_itemsets(itemsets))
 
         output.write('\n')
         output.write(f'====== High-confidence association rules (min_conf = {min_conf*100}%) ======\n')
-        for lhs, rhs, confidence in assoc_rules:
+        # Sort association rules by confidence in descending order
+        assoc_rules_sorted = sorted(assoc_rules, key=lambda x: x[2], reverse=True)
+
+        for lhs, rhs, confidence in assoc_rules_sorted:
             lhs_str = ", ".join(lhs)
             rhs_str = ", ".join(rhs)
             output.write(f'       [{lhs_str}] => [{rhs_str}] -- (Confidence: {confidence*100:.2f}%)\n')
@@ -232,6 +238,5 @@ def main(min_sup,min_conf,df):
     write_output('output.txt',freq_itemsets,assoc_rules,min_sup,min_conf)
 
 if __name__ == "__main__":
-    # itemsets -- contains all large itemsets with their support
     min_sup, min_conf, df = cmd_line()
     main(min_sup,min_conf,df)

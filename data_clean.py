@@ -36,12 +36,6 @@ df = df.merge(violation_code_mapping[['VIOLATION_CODE','CATEGORY_DESC']], on='VI
 # Remove rows that do not have a score and grade
 df = df[['CAMIS','BORO','CUISINE_DESC','CATEGORY_DESC','GRADE']]
 
-# Remove rows that list category desc as "OTHER"
-df = df[df['CATEGORY_DESC'] != 'OTHER']
-
-# Remove unlisted, nondescript cuisines
-df = df[~df['CUISINE_DESC'].isin(['Not Listed/Not Applicable','Other'])]
-
 # Replace NaN VIOLATION CODE with custom value: 000
 df['CATEGORY_DESC'].fillna('NO VIOLATION FOUND',inplace=True)
 
@@ -162,6 +156,15 @@ df['CUISINE_DESC'] = df['CUISINE_DESC'].map(cuisine_mapping)
 
 # Drop NaN rows
 df.dropna(inplace=True)
+
+# Remove rows that list category desc as "OTHER"
+df = df[df['CATEGORY_DESC'] != 'OTHER']
+
+# Remove unlisted, nondescript cuisines
+df = df[~df['CUISINE_DESC'].isin(['Not Listed/Not Applicable','Other'])]
+
+# Keep only traditional grades (removing incompletes and others)
+df = df[df['GRADE'].isin(['A','B','C'])]
 
 # Reject dataset if less than 1000 rows are left after cleaning
 if df.shape[0] < 1000:
