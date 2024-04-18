@@ -182,7 +182,7 @@ def generate_assoc_rules(freq_itemsets, min_conf):
                     # Calculate confidence
                     confidence = support_combined / support_lhs if support_lhs > 0 else 0
                     if confidence >= min_conf:
-                        assoc_rules.append((lhs, rhs, confidence))
+                        assoc_rules.append((lhs, rhs, confidence, support_combined))
     return assoc_rules
 
 
@@ -222,10 +222,10 @@ def write_output(filename, itemsets, assoc_rules, min_sup, min_conf):
         # Sort association rules by confidence in descending order
         assoc_rules_sorted = sorted(assoc_rules, key=lambda x: x[2], reverse=True)
 
-        for lhs, rhs, confidence in assoc_rules_sorted:
+        for lhs, rhs, confidence, combined_supp in assoc_rules_sorted:
             lhs_str = ", ".join(lhs)
             rhs_str = ", ".join(rhs)
-            output.write(f'       [{lhs_str}] => [{rhs_str}] -- (Confidence: {confidence*100:.2f}%)\n')
+            output.write(f'       [{lhs_str}] => [{rhs_str}] -- (Conf: {confidence*100:.2f}%, Supp: {combined_supp:.2%})\n')
 
 def main(min_sup,min_conf,df):
     

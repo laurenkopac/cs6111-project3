@@ -21,9 +21,6 @@ The below files were used in our program to produce our cleaned dataset (`INTEGR
 |`restaurant_inspection_results.csv`| Original dataset exported from NYC Open Data|
 |`Violation-Health-Code-Mapping.csv`| CSV file mapping violation codes to generalized descriptions|
 
-
-
-
 ## How to Use
 Navigate to the project's root file and run the following to install needed packages after activating the python virtual environment:
 
