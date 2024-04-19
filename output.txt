@@ -1,4 +1,4 @@
-====== Frequent itemsets (min_sup = 10.0%) ======
+====== Frequent itemsets (min_sup = 9.0%) ======
        ['A'] -- 81.04%
        ['Manhattan'] -- 37.2%
        ['MAINTENANCE, CONSTRUCTION & PLACEMENT'] -- 31.81%
@@ -22,9 +22,16 @@
        ['Latin American'] -- 10.66%
        ['A', 'American', 'Manhattan'] -- 10.6%
        ['PLUMBING'] -- 10.0%
+       ['A', 'Beverages'] -- 9.54%
+       ['Italian'] -- 9.36%
 
-====== High-confidence association rules (min_conf = 80.0%) ======
+====== High-confidence association rules (min_conf = 70.0%) ======
+       [Beverages] => [A] -- (Conf: 88.99%, Supp: 9.54%)
        [American] => [A] -- (Conf: 87.00%, Supp: 25.22%)
-       [Manhattan, American] => [A] -- (Conf: 86.32%, Supp: 10.60%)
+       [American, Manhattan] => [A] -- (Conf: 86.32%, Supp: 10.60%)
        [Manhattan] => [A] -- (Conf: 81.80%, Supp: 30.43%)
        [Brooklyn] => [A] -- (Conf: 81.10%, Supp: 21.07%)
+       [Queens] => [A] -- (Conf: 79.20%, Supp: 19.42%)
+       [CONTAMINATION] => [A] -- (Conf: 79.03%, Supp: 17.71%)
+       [Asian] => [A] -- (Conf: 71.79%, Supp: 13.36%)
+       [FOOD HANDLING] => [A] -- (Conf: 70.17%, Supp: 10.75%)
