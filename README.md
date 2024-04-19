@@ -169,21 +169,60 @@ if confidence >= min_conf:
 ```
 
 ### Phase 4: Export
+Once all itemsets above the set support and association rules above the set confidence are found, they are exported to a local `.txt` file for the user to analyze. 
 
-The discovered frequent item sets and association rules are exported to an output file for further analysis.
-
-```python
-# Export frequent item sets and association rules to an output file
-write_output('output.txt', freq_itemsets, assoc_rules, min_sup, min_conf)
-```
+1. 
 
 ## Results of Example Run
 To produce the results of the provided example run in `example-run.txt`, we tuned our parameters to the following:
 
- * `min_sup` = 
- * `min_conf` = 
+ * `min_sup` = 0.09
+ * `min_conf` = 0.7
 
-With these thresholds on our `INTEGRATED-DATASET.csv`, we found the following association rules: 
+With these thresholds on our `INTEGRATED-DATASET.csv`, we found the following high frequency itemsets:
+```
+====== Frequent itemsets (min_sup = 9.0%) ======
+       ['A'] -- 81.04%
+       ['Manhattan'] -- 37.2%
+       ['MAINTENANCE, CONSTRUCTION & PLACEMENT'] -- 31.81%
+       ['A', 'Manhattan'] -- 30.43%
+       ['American'] -- 28.99%
+       ['Brooklyn'] -- 25.979999999999997%
+       ['A', 'American'] -- 25.22%
+       ['Queens'] -- 24.52%
+       ['CONTAMINATION'] -- 22.41%
+       ['A', 'Brooklyn'] -- 21.07%
+       ['A', 'Queens'] -- 19.42%
+       ['Asian'] -- 18.61%
+       ['A', 'CONTAMINATION'] -- 17.71%
+       ['FOOD HANDLING'] -- 15.32%
+       ['A', 'Asian'] -- 13.36%
+       ['PEST CONTROL'] -- 12.76%
+       ['American', 'Manhattan'] -- 12.280000000000001%
+       ['B'] -- 12.17%
+       ['A', 'FOOD HANDLING'] -- 10.75%
+       ['Beverages'] -- 10.72%
+       ['Latin American'] -- 10.66%
+       ['A', 'American', 'Manhattan'] -- 10.6%
+       ['PLUMBING'] -- 10.0%
+       ['A', 'Beverages'] -- 9.54%
+       ['Italian'] -- 9.36%
+```
+
+and following association rules: 
+
+```
+====== High-confidence association rules (min_conf = 70.0%) ======
+       [Beverages] => [A] -- (Conf: 88.99%, Supp: 9.54%)
+       [American] => [A] -- (Conf: 87.00%, Supp: 25.22%)
+       [American, Manhattan] => [A] -- (Conf: 86.32%, Supp: 10.60%)
+       [Manhattan] => [A] -- (Conf: 81.80%, Supp: 30.43%)
+       [Brooklyn] => [A] -- (Conf: 81.10%, Supp: 21.07%)
+       [Queens] => [A] -- (Conf: 79.20%, Supp: 19.42%)
+       [CONTAMINATION] => [A] -- (Conf: 79.03%, Supp: 17.71%)
+       [Asian] => [A] -- (Conf: 71.79%, Supp: 13.36%)
+       [FOOD HANDLING] => [A] -- (Conf: 70.17%, Supp: 10.75%)
+```
 
 ## External Libraries
 Our programs relies on the following Python frameworks:
