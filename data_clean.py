@@ -174,7 +174,7 @@ if df.shape[0] < 1000:
     exit()
 
 # Avoid support issues with too large a dataset
-## If dataset is larger than 5000, randomly sample 1000 rows
+## If dataset is larger than 10000, randomly sample 10000 rows
 if df.shape[0] > 10000:
     # Set random_state for reproducablity, ensure each row is only sampled once
     sampled_df = df.sample(n=10000, replace=False, random_state=42)
