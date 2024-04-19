@@ -223,6 +223,18 @@ and following association rules:
        [Asian] => [A] -- (Conf: 71.79%, Supp: 13.36%)
        [FOOD HANDLING] => [A] -- (Conf: 70.17%, Supp: 10.75%)
 ```
+### Motivation 
+It was our hope with this dataset, we would find cuisines, boros, or combinations of the two, that are strongly associated with a type of Department of Health grade. That way, we could make more informed decisions on where to dine in NYC. To our surpise, we were not able to find strong association rules with grades lower than A. The grade B is the second most frequent grade, appearing in our frequent itemsets with a support of only 12.7% compared to A grades with a suport of 81%. We will chalk this up as a win for NYC restaurant owners and patrons :)
+
+### Association Rules
+We find from our example run, that Beverage establishments are associated with A grades most strongly, followed by American cuisines, particularly those ones located in Manhattan. 
+
+If you are looking to try a new spot in NYC, you are likely to find one up to code in Manhattan, Brooklyn, or Queens. Unfortunately The Bronx and Staten Island did not meet our confidence thershold to be strongly enough assocaited with an A grade.
+
+### Analysis
+Initially, looking only at our association rules, we were confused why any violation would be associated with an 'A' grade with 70% confidence. However, this makes more sense with the context that the grade 'A' is itself a frequent itemset, with a support of 81%. This tells us that overwhelming, restaurants receive As in their insections from the NYC DOH.
+
+This motivated us to learn more about how the grades are actually assigned in the process. We learned that grades are assigned based on a scoring system (the lower the better), and that each grade has a range associated with it (i.e. 0-13 for A, 14-27 for B, and >=28 for C). We experimented with assigning grades combined with scores by introducing A-, B-, C- to make more sense of violations receiveing As. Unfortunately, this was not successful in producing meaningful results and rules. We instead reverted back to the original grades and built rules on that.
 
 ## External Libraries
 Our programs relies on the following Python frameworks:
