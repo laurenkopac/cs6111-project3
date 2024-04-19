@@ -25,13 +25,13 @@ The below files were used in our program to produce our cleaned dataset (`INTEGR
 Navigate to the project's root file and run the following to install needed packages after activating the python virtual environment:
 
 ```bash
-$ pip install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
 To run the program, enter the following into the command line within the `/home/ab5311/Project3` directory after activating the virtual environment, set up as `dbproj3`:
 
 ```bash
-python main.py INTERGRATED-DATASET.csv <min_sup> <min_conf>
+python3 main.py INTERGRATED-DATASET.csv <min_sup> <min_conf>
 ```
 
 ### Parameters
