@@ -239,7 +239,7 @@ def format_itemsets(itemsets):
 
     # Format each itemset for print out per the project guidelines
     for itemset, support in all_itemsets_sorted:
-        formatted_itemsets += f"       {[itemset]} -- {support*100}%\n".replace('(','').replace(')','')
+        formatted_itemsets += f"       {[itemset]} -- {support*100:.3f}%\n".replace('(','').replace(')','')
         
     return formatted_itemsets
 
@@ -270,7 +270,7 @@ def write_output(filename, itemsets, assoc_rules, min_sup, min_conf):
         for lhs, rhs, confidence, combined_supp in assoc_rules_sorted:
             lhs_str = ", ".join(lhs)
             rhs_str = ", ".join(rhs)
-            output.write(f'       [{lhs_str}] => [{rhs_str}] -- (Conf: {confidence*100:.2f}%, Supp: {combined_supp:.2%})\n')
+            output.write(f'       [{lhs_str}] => [{rhs_str}] -- (Conf: {confidence*100:.3f}%, Supp: {combined_supp:.3%})\n')
 
 def run_apriori(df, min_sup, min_conf):
     """
